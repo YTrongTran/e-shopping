@@ -3,10 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Traits\traitUploadImage;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
+    use traitUploadImage;
+    private $user;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -55,7 +65,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.profile');
+        $title = "Home";
+        $key = "Profile";
+        if (auth::check()) {
+
+            return view('admin.user.profile', compact('key', 'title'));
+        }
+        return redirect()->to('admin');
     }
 
     /**
@@ -67,7 +83,32 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $password = $request->password;
+        if (!empty($password)) {
+            $password = bcrypt($request->password);
+        } else {
+            $password = Auth::user()->password;
+        }
+        $data = [
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'password' => $password,
+            'country_id' => 1,
+        ];
+
+        if (is_dir('upload/user/' . $id)) {
+            $avart = $this->uploadAvatar($request, 'avatar', 'user', $id);
+            if (!empty($avart)) {
+                $data['avatar'] = $avart['avatar_name'];
+                $data['avatar_path'] = $avart['avatar_path'];
+                unlink(Auth::user()->avatar_path);
+            }
+        } else {
+            mkdir('upload/user/' . $id);
+        }
+        $this->user->find($id)->update($data);
+        return redirect()->to('admin/user/profile/' . $id);
     }
 
     /**

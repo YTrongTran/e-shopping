@@ -25,7 +25,6 @@ class AdminController extends Controller
      */
     public function create()
     {
-
         return view('admin.login.login');
     }
 
@@ -37,7 +36,6 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = [
             'name' => $request->name,
             'password' => $request->password,
@@ -46,6 +44,11 @@ class AdminController extends Controller
             return redirect()->to('admin/user/profile/' . Auth::id());
         }
         return redirect()->to('admin');
+    }
+    public function logoutAdmin()
+    {
+        Auth::logout();
+        return view('admin.login.login');
     }
 
     /**

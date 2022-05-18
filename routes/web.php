@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 //admin
 Route::prefix('admin')->group(function () {
     Route::get('/', 'Admin\AdminController@create');
+    Route::get('/', 'Admin\AdminController@logoutAdmin')->name('admin.logout');
     Route::post('/', 'Admin\AdminController@store')->name('admin.login');
 });
