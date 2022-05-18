@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+//admin
+Route::prefix('admin')->group(function () {
+    Route::get('/', 'Admin\AdminController@create');
+    Route::post('/', 'Admin\AdminController@store')->name('admin.login');
 });
