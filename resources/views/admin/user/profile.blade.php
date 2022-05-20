@@ -65,8 +65,13 @@
                             <div class="form-group">
                                 <label class="col-md-12">Full Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Tran trong y" class="form-control form-control-line" name="name" value="{{ Auth::user()->name }}">
+                                    <input type="text" placeholder="Tran trong y" class="form-control form-control-line @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}">
                                 </div>
+                                <p style="color: red">
+                                    @error('name')
+                                    {{ $message }}
+                                    @enderror
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="example-email" class="col-md-12">Email</label>
@@ -95,7 +100,7 @@
                             <div class="form-group">
                                 <label class="col-sm-12">Select Country</label>
                                 <div class="col-sm-12">
-                                    <select class="form-select shadow-none form-control-line" name="country_id">
+                                    <select class="form-select shadow-none form-control-line @error('country_id') is-invalid @enderror" name="country_id">
                                         <option value="">---Select Country---</option>
                                         @foreach($country as $key)
                                         @if ($key['id'] === $checkidCountry->id)
@@ -108,6 +113,11 @@
 
                                     </select>
                                 </div>
+                                <p style="color: red">
+                                    @error('country_id')
+                                    {{ $message }}
+                                    @enderror
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label> File upload</label>
@@ -116,10 +126,15 @@
                                         <span class="input-group-text">Upload</span>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="avatar" >
+                                        <input type="file" class="custom-file-input @error('avatar') is-invalid @enderror" id="inputGroupFile01" name="avatar" >
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
                                 </div>
+                                <p style="color: red">
+                                    @error('avatar')
+                                    {{ $message }}
+                                    @enderror
+                                </p>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">

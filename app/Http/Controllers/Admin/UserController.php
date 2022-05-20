@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Coutrys;
+
 use App\Http\Controllers\Controller;
-use App\Model\Coutrys as ModelCoutrys;
+use App\Http\Requests\Admin\UserRequest;
+use App\Model\Coutrys;
 use App\User;
 use App\Traits\traitUploadImage;
 
@@ -18,7 +19,7 @@ class UserController extends Controller
     use traitUploadImage;
     private $user;
     private $country;
-    public function __construct(User $user, ModelCoutrys $country)
+    public function __construct(User $user, Coutrys $country)
     {
         $this->user = $user;
         $this->country = $country;
@@ -48,7 +49,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
     }
@@ -90,7 +91,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $password = $request->password;
         if (!empty($password)) {

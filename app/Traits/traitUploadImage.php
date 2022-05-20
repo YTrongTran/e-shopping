@@ -29,6 +29,22 @@ trait traitUploadImage
         }
         return null;
     }
+    public function uploadAvatarBlog($request, $name, $folder, $id_user, $id)
+    {
+        if ($request->hasFile($name)) {
+            $file = $request->$name;
+            $namImage = $file->getclientOriginalName();
+            $extenImage = $file->getclientOriginalExtension();
+            $hashFile =  Str::random('15') . '.' . $extenImage;
+            $file->move('upload/' . $folder . '/' . $id_user . '/' . $id, $hashFile);
+            $data = [
+                'avatar_name' => $namImage,
+                'avatar_path' => 'upload/' . $folder . '/' . $id_user . '/' . $id . '/' . $hashFile,
+            ];
+            return $data;
+        }
+        return null;
+    }
     public function deleted($model, $id)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -39,7 +55,7 @@ trait traitUploadImage
             ]
 
         );
-        Toastr::success('Thông báo', 'Bạn đã xoá thành công ' . $id . '  !!!');
+        Toastr::success('Thông báo', 'Bạn đã xoá thành công id = ' . $id . '  !!!');
         return $delete;
     }
 }

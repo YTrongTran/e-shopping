@@ -15,6 +15,7 @@ class UpdateBlogsTable extends Migration
     {
         Schema::table('blogs', function (Blueprint $table) {
             $table->string('image_path')->nullable();
+            $table->string('display_name')->nullable();
         });
     }
 

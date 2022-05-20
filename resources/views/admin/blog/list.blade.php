@@ -58,11 +58,11 @@
 
                 <th scope="row">{{$loop->index + 1  }}</th>
                 <td>{{ $key['name'] }}</td>
-                <td><img src="{{ asset( $key['image_blog']) }}" alt="ảnh đại diện"></td>
-                <td>{{ $key['user_id'] }}</td>
+                <td><img src="{{ asset( $key['image_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
+                <td>{{ $key->user->name }}</td>
                 <td>
-                    <a href="{{ route('country.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Edit</a> |
-                    <form style="display: inline-block" action="{{ route('country.delete',['id'=>$key['id']]) }}" method="post" >
+                    <a href="{{ route('blog.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Edit</a> |
+                    <form style="display: inline-block" action="{{ route('blog.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
                         <button class="btn btn-outline-danger" type="submit" >
