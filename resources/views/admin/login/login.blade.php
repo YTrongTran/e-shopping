@@ -25,6 +25,9 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
 		      	<h3 class="mb-4 text-center">Have an account?</h3>
+                  <div class="messager_login">
+                    {{ Session::get('record_login') }}
+                  </div>
 		      	<form action="{{ route('admin.login') }}" class="signin-form" method="POST">
                       @csrf
                         <div class="form-group">

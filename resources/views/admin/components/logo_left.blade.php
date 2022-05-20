@@ -28,7 +28,7 @@
             <ul class="navbar-nav float-end">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset(Auth::user()->avatar_path) }}" alt="user" class="rounded-circle" width="31">
+                        <img src="{{ asset(!empty(Auth::user()->avatar_path) ? Auth::user()->avatar_path: "") }}" alt="user" class="rounded-circle" width="31">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                         @if (Auth::check())

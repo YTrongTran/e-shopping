@@ -5,11 +5,11 @@
 @endsection
 
 @section('css')
-
+<link rel="stylesheet" href="{{ asset('admins/user/edit.css') }}">
 @endsection
 
-@section('content')
 
+@section('content')
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
@@ -96,7 +96,15 @@
                                 <label class="col-sm-12">Select Country</label>
                                 <div class="col-sm-12">
                                     <select class="form-select shadow-none form-control-line" name="country_id">
-                                        <option value="">London</option>
+                                        <option value="">---Select Country---</option>
+                                        @foreach($country as $key)
+                                        @if ($key['id'] === $checkidCountry->id)
+                                            <option  selected value="{{ $key['id'] }}">{{ $key['name'] }}</option>
+                                        @else
+                                            <option   value="{{ $key['id'] }}">{{ $key['name'] }}</option>
+
+                                        @endif
+                                        @endforeach
 
                                     </select>
                                 </div>
@@ -127,10 +135,9 @@
 
     </div>
 
-
-
 @endsection
 
 @section('js')
-
+<script src="{{ asset('admins/user/edit.js') }}"></script>
+{!! Toastr::message() !!}
 @endsection

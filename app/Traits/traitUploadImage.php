@@ -2,7 +2,10 @@
 
 namespace App\Traits;
 
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
+
 
 /**
  *
@@ -25,5 +28,18 @@ trait traitUploadImage
             return $data;
         }
         return null;
+    }
+    public function deleted($model, $id)
+    {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $delete = $this->$model->find($id)->update(
+            [
+                'deleted_at' => 1,
+                'updated_at' => Carbon::now()
+            ]
+
+        );
+        Toastr::success('Thông báo', 'Bạn đã xoá thành công ' . $id . '  !!!');
+        return $delete;
     }
 }

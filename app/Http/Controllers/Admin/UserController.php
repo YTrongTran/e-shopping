@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Coutrys;
 use App\Http\Controllers\Controller;
-use App\Traits\traitUploadImage;
+use App\Model\Coutrys as ModelCoutrys;
 use App\User;
+use App\Traits\traitUploadImage;
+
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +17,11 @@ class UserController extends Controller
 {
     use traitUploadImage;
     private $user;
-    public function __construct(User $user)
+    private $country;
+    public function __construct(User $user, ModelCoutrys $country)
     {
         $this->user = $user;
+        $this->country = $country;
     }
     /**
      * Display a listing of the resource.
@@ -67,9 +73,12 @@ class UserController extends Controller
     {
         $title = "Home";
         $key = "Profile";
-        if (auth::check()) {
+        $user = $this->user->find($id);
+        $country = $this->country->where('deleted_at', 0)->get();
+        $checkidCountry = $user->country;
 
-            return view('admin.user.profile', compact('key', 'title'));
+        if (auth::check()) {
+            return view('admin.user.profile', compact('key', 'title', 'user', 'country', 'checkidCountry'));
         }
         return redirect()->to('admin');
     }
@@ -108,7 +117,8 @@ class UserController extends Controller
             mkdir('upload/user/' . $id);
         }
         $this->user->find($id)->update($data);
-        return redirect()->to('admin/user/profile/' . $id);
+        Toastr::success("Bạn cập nhật thành công thông tin tài khoản " . Auth::user()->name);
+        return redirect('admin/user/profile/' . $id);
     }
 
     /**

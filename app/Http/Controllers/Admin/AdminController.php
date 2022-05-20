@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +42,10 @@ class AdminController extends Controller
             'password' => $request->password,
         ];
         if (Auth::attempt($data)) {
-            return redirect()->to('admin/user/profile/' . Auth::id());
+            Toastr::info("Đăng nhập thành công với tài khoản " . $data['name']);
+            return redirect('admin/user/profile/' . Auth::id());
+        } else {
+            return redirect('admin')->with('record_login', 'Tài khoản hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại');
         }
         return redirect()->to('admin');
     }

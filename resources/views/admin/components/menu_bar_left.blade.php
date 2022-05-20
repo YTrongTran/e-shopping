@@ -20,22 +20,38 @@
                         </a>
                     </li>
                 @endif
+
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="form-basic.html"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('country.index') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-border-none"></i>
+                        <span class="hide-menu">Country</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('blog.index') }}"
+                        aria-expanded="false">
+                        <i class="me-2 mdi mdi-blogger"></i>
+                        <span class="hide-menu">Blog</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ asset('template-admin/nice-html/ltr/form-basic.html') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-arrange-bring-forward"></i>
                         <span class="hide-menu">Form Basic</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ asset('template-admin/nice-html/table-basic.html') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-border-none"></i>
                         <span class="hide-menu">Table</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ asset('template-admin/nice-html/ltr/icon-material.html') }}"
                         aria-expanded="false">
                         <i class="mdi mdi-face"></i>
                         <span class="hide-menu">Icon</span>

@@ -45,9 +45,8 @@
     <script src="{{ asset('template-admin/assets/libs/chartist/dist/chartist.min.js' ) }}"></script>
     <script src="{{ asset('template-admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' ) }}"></script>
     <script src="{{ asset('template-admin/dist/js/pages/dashboards/dashboard1.js' ) }}"></script>
-    @section('js')
+    @yield('js')
 
-    @endsection
 </body>
 
 </html>
