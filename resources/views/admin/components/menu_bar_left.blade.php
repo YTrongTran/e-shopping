@@ -24,8 +24,15 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('country.index') }}"
                         aria-expanded="false">
-                        <i class="mdi mdi-border-none"></i>
+                        <i class="me-2 mdi mdi-earth"></i>
                         <span class="hide-menu">Country</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('category.index') }}"
+                        aria-expanded="false">
+                        <i class="mdi mdi-border-none"></i>
+                        <span class="hide-menu">Category</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -33,6 +40,13 @@
                         aria-expanded="false">
                         <i class="me-2 mdi mdi-blogger"></i>
                         <span class="hide-menu">Blog</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('product.index') }}"
+                        aria-expanded="false">
+                        <i class="me-2 mdi mdi-format-list-bulleted"></i>
+                        <span class="hide-menu">Products</span>
                     </a>
                 </li>
 

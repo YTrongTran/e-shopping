@@ -31,6 +31,7 @@ trait traitUploadImage
     }
     public function uploadAvatarBlog($request, $name, $folder, $id_user, $id)
     {
+
         if ($request->hasFile($name)) {
             $file = $request->$name;
             $namImage = $file->getclientOriginalName();
@@ -44,6 +45,19 @@ trait traitUploadImage
             return $data;
         }
         return null;
+    }
+    public function uploadAvatarArray($item, $namImage, $extenImage, $folder, $id_user, $id)
+    {
+
+
+
+        $hashFile =  Str::random('15') . '.' . $extenImage;
+        $item->move('upload/' . $folder . '/' . $id_user . '/' . $id, $hashFile);
+        $data = [
+            'avatar_name' => $namImage,
+            'avatar_path' => 'upload/' . $folder . '/' . $id_user . '/' . $id . '/' . $hashFile,
+        ];
+        return $data;
     }
     public function deleted($model, $id)
     {

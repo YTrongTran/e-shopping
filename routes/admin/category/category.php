@@ -1,0 +1,14 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('admin')->group(function () {
+    Route::prefix('/category')->group(function () {
+        Route::get('/index', 'Admin\CategoryController@index')->name('category.index');
+        Route::get('/create', 'Admin\CategoryController@create')->name('category.create');
+        Route::post('/create', 'Admin\CategoryController@store')->name('category.store');
+        Route::get('/edit/{id}', 'Admin\CategoryController@edit')->name('category.edit');
+        Route::post('/edit/{id}', 'Admin\CategoryController@update')->name('category.update');
+        Route::post('/delete/{id}', 'Admin\CategoryController@destroy')->name('category.delete');
+    });
+});

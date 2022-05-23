@@ -48,6 +48,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminUserRoutes();
         $this->mapAdminCountryRoutes();
         $this->mapAdminBlogRoutes();
+        $this->mapAdminCategoryRoutes();
+        $this->mapAdminProductsRoutes();
 
         //
     }
@@ -82,6 +84,18 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/blog/blog.php'));
+    }
+    protected function mapAdminCategoryRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/category/category.php'));
+    }
+    protected function mapAdminProductsRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/product/product.php'));
     }
 
     /**
