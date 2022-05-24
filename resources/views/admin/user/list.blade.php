@@ -7,6 +7,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('admins/country/list.css') }}">
+<link rel="stylesheet" href="{{ asset('admins/products/add.css') }}">
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endsection
 
@@ -34,8 +35,8 @@
 
 <div class="container-fluid">
     <div class="create_country">
-        <a href="{{ route('category.create') }}"  class="btn btn-outline-success">
-            Thêm danh mục
+        <a href="{{ route('user.create') }}"  class="btn btn-outline-success">
+            Thêm người dùng
          </a>
     </div>
     <div class="row">
@@ -46,38 +47,50 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên danh mục</th>
-                <th scope="col">Mô tả đường dẫn</th>
-                <th scope="col">Danh mục cha</th>
+                <th scope="col">Tên người dùng</th>
+                <th scope="col">Tên email</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Vai trò</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($listCategory as $key)
+            @foreach ($listUser as $key)
             <tr>
 
                 <th scope="row">{{$loop->index + 1  }}</th>
-                <td>{{ $key['name'] }}</td>
-                <td>{{ $key['slug'] }}</td>
-                <td>{{ $key['parent_id'] }}</td>
+                <td class="desc">{{ $key['name'] }}</td>
+                <td>{{ $key['email'] }}</td>
+                <td><img src="{{ asset( $key['avatar_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
+                <td>{{ $key['phone'] }}</td>
+
                 <td>
-                    <a href="{{ route('category.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
-                    <form style="display: inline-block" action="{{ route('category.delete',['id'=>$key['id']]) }}" method="post" >
+                    @foreach ($key->roles()->pluck('display_name') as $role)
+                     <p>
+                        {{$role }}
+                     </p>
+                    @endforeach
+                </td>
+                <td>
+                    <a href="{{ route('user.editUser',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+
+                    <form style="display: inline-block" action="{{ route('user.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
                         <button class="btn btn-outline-danger" type="submit" >
                             <i class="me-2 mdi mdi-delete "></i>
                             Xoá
                         </button>
-
                     </form>
+
                 </td>
             </tr>
             @endforeach
 
         </tbody>
     </table>
-    {{ $listCategory->links() }}
+    {{ $listUser->links() }}
 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model\Coutrys;
+use App\Model\Roles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'address', 'country_id', 'avatar', 'avatar_path'
+        'name', 'email', 'password', 'phone', 'address', 'country_id', 'avatar', 'avatar_path', 'deleted_at','updated_at'
     ];
 
     /**
@@ -39,6 +40,11 @@ class User extends Authenticatable
     ];
     public function country()
     {
-        return $this->belongsTo(Coutrys::class);
+        return $this->belongsTo(Coutrys::class, 'country_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Roles::class, 'role_user', 'user_id', 'role_id')->withTimestamps();
     }
 }

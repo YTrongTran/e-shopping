@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="create_country">
                 <a href="{{ route('category.index') }}"  class="btn btn-outline-success">
-                   List Category
+                    Danh sách danh mục
                  </a>
             </div>
             <div class="row">
@@ -56,8 +56,8 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-outline-primary">Submit</button>
-                            <button type="reset" class="btn btn-outline-danger">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary">Thêm danh mục</button>
+                            <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>
                     </div>
                 </div>

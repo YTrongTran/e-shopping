@@ -34,8 +34,8 @@
 
 <div class="container-fluid">
     <div class="create_country">
-        <a href="{{ route('category.create') }}"  class="btn btn-outline-success">
-            Thêm danh mục
+        <a href="{{ route('permission.create') }}"  class="btn btn-outline-success">
+           Thêm quyền cho vai trò
          </a>
     </div>
     <div class="row">
@@ -46,25 +46,25 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên danh mục</th>
-                <th scope="col">Mô tả đường dẫn</th>
-                <th scope="col">Danh mục cha</th>
+                <th scope="col">Tên vai trò</th>
+                <th scope="col">Mô tả vai trò</th>
+                <th scope="col">Mô phỏng key code</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($listCategory as $key)
+            @foreach ($permissions as $permission)
             <tr>
 
                 <th scope="row">{{$loop->index + 1  }}</th>
-                <td>{{ $key['name'] }}</td>
-                <td>{{ $key['slug'] }}</td>
-                <td>{{ $key['parent_id'] }}</td>
+                <td>{{ $permission['name'] }}</td>
+                <td>{{ $permission['display_name'] }}</td>
+                <td>{{ $permission['key_code'] }}</td>
                 <td>
-                    <a href="{{ route('category.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
-                    <form style="display: inline-block" action="{{ route('category.delete',['id'=>$key['id']]) }}" method="post" >
+                    <a href="{{ route('permission.edit',['id'=> $permission['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+                    <form style="display: inline-block" action="{{ route('permission.delete',['id'=>$permission['id']]) }}" method="post" >
                         @csrf
-                        <input type="hidden" name="id" value="{{ $key['id'] }}" >
+                        <input type="hidden" name="id" value="{{ $permission['id'] }}" >
                         <button class="btn btn-outline-danger" type="submit" >
                             <i class="me-2 mdi mdi-delete "></i>
                             Xoá
@@ -77,7 +77,7 @@
 
         </tbody>
     </table>
-    {{ $listCategory->links() }}
+    {{ $permissions->links() }}
 </div>
             </div>
         </div>

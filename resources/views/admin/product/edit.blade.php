@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="create_country">
                 <a href="{{ route('product.index') }}"  class="btn btn-outline-success">
-                   List Products
+                    Danh sách sản phẩm
                  </a>
             </div>
             <div class="row">
@@ -114,8 +114,8 @@
                                 <textarea name="content" id="content" cols="100" rows="20" style="display: block;resize: none;"  >{{ $product->content }}</textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-outline-primary">Submit</button>
-                            <button type="reset" class="btn btn-outline-danger">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary">Cập nhật sản phẩm</button>
+                            <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>
                     </div>
                 </div>

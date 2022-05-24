@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="create_country">
                 <a href="{{ route('blog.index') }}"  class="btn btn-outline-success">
-                   List Blog
+                   Danh sách bài viết
                  </a>
             </div>
             <div class="row">
@@ -64,8 +64,8 @@
                                 <label>Mô tả bài viết(<span class="help" style="color:red">*</span>)</label>
                                 <textarea name="desc" id="desc" cols="100" rows="20" style="display: block;resize: none;"  ></textarea>
                             </div>
-                            <button type="submit" class="btn btn-outline-primary">Submit</button>
-                            <button type="reset" class="btn btn-outline-danger">Cancel</button>
+                            <button type="submit" class="btn btn-outline-primary">Thêm bài viết</button>
+                            <button type="reset" class="btn btn-outline-danger">Huỷ </button>
                         </form>
                     </div>
                 </div>

@@ -3,10 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Permission;
+use App\Model\Roles;
+use App\Traits\traitUploadImage;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    use traitUploadImage;
+    private $role;
+    private $permission;
+
+    public function __construct(Roles $role, Permission $permission)
+    {
+        $this->role = $role;
+        $this->permission = $permission;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Home';
+        $key = 'List';
+        $listRole = $this->role->where('deleted_at', 0)->latest()->paginate(6);
+        return view('admin.role.list', compact('title', 'key', 'listRole'));
     }
 
     /**
@@ -24,7 +40,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Home';
+        $key = 'Add';
+        $permissionsParent = $this->permission->where('parent_id', 0)->get();
+        return view('admin.role.add', compact('title', 'key', 'permissionsParent'));
     }
 
     /**
@@ -35,7 +54,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = $this->role->create([
+            'name' =>  ucfirst($request->name),
+            'display_name' =>  ucfirst($request->display_name),
+        ]);
+        Toastr::success('Bạn đã thêm thành công vai trò người dùng !!!');
+        return redirect('admin/role/index');
     }
 
     /**
@@ -57,7 +81,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Home';
+        $key = 'Edit';
+        $role = $this->role->find($id);
+        return view('admin.role.edit', compact('title', 'key', 'role'));
     }
 
     /**
@@ -69,7 +96,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $role = $this->role->find($id)->update([
+            'name' =>  ucfirst($request->name),
+            'display_name' =>  ucfirst($request->display_name),
+        ]);
+        Toastr::success('Bạn đã cập nhật thành công vai trò người dùng !!!');
+        return redirect('admin/role/index');
     }
 
     /**
@@ -80,6 +113,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->deleted('role', $id);
+        return redirect('admin/role/index');
     }
 }

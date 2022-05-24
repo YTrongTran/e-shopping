@@ -38,7 +38,7 @@
                             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Đăng nhập</button>
                         </div>
 	          </form>
 	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>

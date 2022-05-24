@@ -50,6 +50,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminBlogRoutes();
         $this->mapAdminCategoryRoutes();
         $this->mapAdminProductsRoutes();
+        $this->mapAdminRoleRoutes();
+        $this->mapAdminPermissionRoutes();
 
         //
     }
@@ -96,6 +98,19 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/product/product.php'));
+    }
+
+    protected function mapAdminRoleRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/role/role.php'));
+    }
+    protected function mapAdminPermissionRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/permission/permission.php'));
     }
 
     /**

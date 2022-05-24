@@ -43,10 +43,10 @@
                 <form class="form-horizontal mt-4" method="POST" action="{{ route('country.update',['id'=>$country->id]) }}">
                     @csrf
                     <div class="form-group">
-                        <label>Name Country(<span class="help" style="color:red">*</span>)</label>
+                        <label>Tên quốc gia(<span class="help" style="color:red">*</span>)</label>
                         <input type="text" class="form-control" placeholder="Vietnames..." name="name" value="{{ $country['name'] }}">
                     </div>
-                    <button type="submit" class="btn btn-outline-primary">Sửa</button>
+                    <button type="submit" class="btn btn-outline-primary">Cập nhật quốc gia</button>
                     <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                 </form>
             </div>

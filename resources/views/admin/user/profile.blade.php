@@ -35,7 +35,7 @@
             <div class="col-lg-4 col-xlg-3">
                 <div class="card">
                     <div class="card-body">
-                        <center class="mt-4"> <img src="{{ asset(Auth::user()->avatar_path) }}" class="rounded-circle" width="150">
+                        <center class="mt-4"> <img src="{{ asset(Auth::user()->avatar_path) }}" class="rounded-circle" width="300" style="object-fit: cover; border-radius: 50%">
                             <h4 class="card-title mt-2">{{ Auth::user()->name }}</h4>
                         </center>
                     </div>
@@ -138,7 +138,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success text-white">Update Profile</button>
+                                    <button class="btn btn-success text-white">Cập nhật hồ sơ</button>
                                 </div>
                             </div>
                         </form>

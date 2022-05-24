@@ -35,7 +35,7 @@
 <div class="container-fluid">
     <div class="create_country">
         <a href="{{ route('blog.create') }}"  class="btn btn-outline-success">
-            Add Blog
+            Thêm vài viết
          </a>
     </div>
     <div class="row">
@@ -61,13 +61,13 @@
                 <td><img src="{{ asset( $key['image_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
                 <td>{{ $key->user->name }}</td>
                 <td>
-                    <a href="{{ route('blog.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Edit</a> |
+                    <a href="{{ route('blog.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
                     <form style="display: inline-block" action="{{ route('blog.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
                         <button class="btn btn-outline-danger" type="submit" >
                             <i class="me-2 mdi mdi-delete "></i>
-                            Deleted
+                            Xoá
                         </button>
 
                     </form>

@@ -6,7 +6,6 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('admins/user/edit.css') }}">
 <link rel="stylesheet" href="{{ asset('admins/country/list.css') }}">
 
 @endsection
@@ -34,29 +33,30 @@
 
         <div class="container-fluid">
             <div class="create_country">
-                <a href="{{ route('category.index') }}"  class="btn btn-outline-success">
-                    Danh sách danh mục
+                <a href="{{ route('role.index') }}"  class="btn btn-outline-success">
+                   Danh sách vai trò
                  </a>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card card-body">
-                        <form class="form-horizontal mt-4" method="POST" action="{{ route('category.update',['id'=> $category->id]) }}">
+                        <form class="form-horizontal mt-4" method="POST" action="{{ route('role.update',['id'=>$role->id]) }}">
                             @csrf
-                            <div class="form-group">
-                                <label>Tên danh mục(<span class="help" style="color:red">*</span>)</label>
-                                <input type="text" class="form-control" placeholder="Categories..." name="name" value="{{$category->name }}">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Tên vai trò(<span class="help" style="color:red">*</span>)</label>
+                                        <input type="text" class="form-control" placeholder="Role name..." name="name" value="{{ $role->name }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Mô tả vai trò(<span class="help" style="color:red">*</span>)</label>
+                                        <input type="text" class="form-control" placeholder="Role discription..." name="display_name" value="{{ $role->display_name }}">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Chọn danh mục</label>
-                                <select class="form-select shadow-none col-12" id="inlineFormCustomSelect" name="parent_id">
-                                    <option value="0">Danh mục cha</option>
-                                    {!! $categorySelect !!}
-                                </select>
-                            </div>
-
-
-                            <button type="submit" class="btn btn-outline-primary">Cập nhật danh mục</button>
+                            <button type="submit" class="btn btn-outline-primary">Cập nhật vai trò</button>
                             <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>
                     </div>
@@ -68,8 +68,7 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('admins/user/edit.js') }}"></script>
-{!! Toastr::message() !!}
+
 @endsection
 
 

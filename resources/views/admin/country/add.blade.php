@@ -46,7 +46,7 @@
                                 <label>Tên quốc gia(<span class="help" style="color:red">*</span>)</label>
                                 <input type="text" class="form-control" placeholder="Vietnames..." name="name" value="{{ old('name') }}">
                             </div>
-                            <button type="submit" class="btn btn-outline-primary">Thêm</button>
+                            <button type="submit" class="btn btn-outline-primary">Thêm quốc gia</button>
                             <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>
                     </div>
