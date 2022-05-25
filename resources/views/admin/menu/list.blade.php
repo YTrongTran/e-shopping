@@ -7,7 +7,6 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('admins/country/list.css') }}">
-<link rel="stylesheet" href="{{ asset('admins/products/add.css') }}">
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endsection
 
@@ -35,8 +34,8 @@
 
 <div class="container-fluid">
     <div class="create_country">
-        <a href="{{ route('product.create') }}"  class="btn btn-outline-success">
-            Thêm sản phẩm
+        <a href="{{ route('menu.create') }}"  class="btn btn-outline-success">
+            Thêm menu
          </a>
     </div>
     <div class="row">
@@ -47,48 +46,40 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên sản phẩm</th>
-                <th scope="col">Danh mục sản phẩm</th>
-                <th scope="col">Giá sản phẩm</th>
-                <th scope="col">Ảnh sản phẩm</th>
-                <th scope="col">Tên tác giả</th>
+                <th scope="col">Tên menu</th>
+                <th scope="col">Mô tả menu</th>
+                <th scope="col">Danh mục cha</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($listProducts as $key)
+            @foreach ($menus as $menu)
             <tr>
 
                 <th scope="row">{{$loop->index + 1  }}</th>
-                <td class="desc">{{ $key['name'] }}</td>
-                <td>{{ $key->category->name }}</td>
-                <td>{{ number_format( $key['price'],0,',','.') }} đ</td>
-                <td><img src="{{ asset( $key['feature_image_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
-                <td>{{ $key->user->name }}</td>
+                <td>{{ $menu['name'] }}</td>
+                <td>{{ $menu['slug'] }}</td>
+                <td>{{ $menu['parent_id'] }}</td>
                 <td>
 
+                    <a href="{{ route('menu.edit',['id'=> $menu['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
 
-                    @can('product-edit',$key['id'])
-                        <a href="{{ route('product.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
-                    @endcan
+                    <form style="display: inline-block" action="{{ route('menu.delete',['id'=>$menu['id']]) }}" method="post" >
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $menu['id'] }}" >
+                        <button class="btn btn-outline-danger" type="submit" >
+                            <i class="me-2 mdi mdi-delete "></i>
+                            Xoá
+                        </button>
 
-                    @can('product-delete',$key['id'])
-                        <form style="display: inline-block" action="{{ route('product.delete',['id'=>$key['id']]) }}" method="post" >
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $key['id'] }}" >
-                            <button class="btn btn-outline-danger" type="submit" >
-                                <i class="me-2 mdi mdi-delete "></i>
-                                Xoá
-                            </button>
-                        </form>
-                    @endcan
+                    </form>
                 </td>
             </tr>
             @endforeach
 
         </tbody>
     </table>
-    {{ $listProducts->links() }}
+    {{ $menus->links() }}
 </div>
             </div>
         </div>

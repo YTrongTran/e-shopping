@@ -166,12 +166,13 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $title = "Home";
-        $key = "Profile";
-        $user = $this->user->find($id);
-        $country = $this->country->where('deleted_at', 0)->get();
-        $checkidCountry = $user->country;
         if (auth::check()) {
+            $title = "Home";
+            $key = "Profile";
+            $user = $this->user->find($id);
+            $country = $this->country->where('deleted_at', 0)->get();
+            $checkidCountry = $user->country;
+
             return view('admin.user.profile', compact('key', 'title', 'user', 'country', 'checkidCountry'));
         }
         return redirect()->to('admin');

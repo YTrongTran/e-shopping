@@ -57,7 +57,11 @@
                 <th scope="row">{{$loop->index + 1  }}</th>
                 <td>{{ $key['name'] }}</td>
                 <td>
-                    <a href="{{ route('country.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+                    @can('country-edit')
+                    <a href="{{ route('country.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                    |
+                    @endcan
+                    @can('country-delete')
                     <form style="display: inline-block" action="{{ route('country.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
@@ -67,6 +71,7 @@
                         </button>
 
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach

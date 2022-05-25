@@ -34,28 +34,28 @@
 
         <div class="container-fluid">
             <div class="create_country">
-                <a href="{{ route('permission.index') }}"  class="btn btn-outline-success">
-                    Danh sách quyền của vai trò
+                <a href="{{ route('menu.index') }}"  class="btn btn-outline-success">
+                    Danh sách menu
                  </a>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card card-body">
-                        <form class="form-horizontal mt-4" method="POST" action="{{ route('permission.update',['id'=>$permission->id]) }}">
+                        <form class="form-horizontal mt-4" method="POST" action="{{ route('menu.update',['id'=>$menu->id]) }}">
                             @csrf
                             <div class="form-group">
-                                <label>Tên quyền của vai trò(<span class="help" style="color:red">*</span>)</label>
-                                <input type="text" class="form-control" placeholder="Quyền của vai trò..." name="name" value="{{ $permission->name }}">
+                                <label>Tên menu(<span class="help" style="color:red">*</span>)</label>
+                                <input type="text" class="form-control" placeholder="..." name="name" value="{{ $menu->name }}">
                             </div>
                             <div class="form-group">
-                                <label>Chọn quyền</label>
+                                <label>Chọn menu</label>
                                 <select class="form-select shadow-none col-12" id="inlineFormCustomSelect" name="parent_id">
-                                    <option value="0">Danh mục cha</option>
-                                    {!! $htmlPermission !!}
+                                    <option value="0">Danh mục menu cha</option>
+                                    {!! $selectedMenu !!}
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-outline-primary">Cập nhật quyền cho vai trò</button>
+                            <button type="submit" class="btn btn-outline-primary">Sửa menu</button>
                             <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>
                     </div>

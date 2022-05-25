@@ -1,0 +1,11 @@
+.icon {
+    position: relative;
+}
+.me-2.mdi.mdi-apple-keyboard-control.card_icon {
+    position: absolute;
+    right: 1%;
+    top: 0%;
+    transform: rotate(180deg);
+    transition: all 5s linear;
+    font-size: 20px;
+}

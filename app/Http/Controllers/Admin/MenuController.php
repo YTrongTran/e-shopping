@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Components\Recursive;
 use App\Http\Controllers\Controller;
-use App\Model\Permission;
-use App\Model\Roles;
+use App\Model\Menu;
 use App\Traits\traitUploadImage;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class RoleController extends Controller
+class MenuController extends Controller
 {
     use traitUploadImage;
-    private $role;
-    private $permission;
-
-    public function __construct(Roles $role, Permission $permission)
+    private $menu;
+    public function __construct(Menu $menu)
     {
-        $this->role = $role;
-        $this->permission = $permission;
+        $this->menu = $menu;
     }
     /**
      * Display a listing of the resource.
@@ -29,8 +27,8 @@ class RoleController extends Controller
     {
         $title = 'Home';
         $key = 'List';
-        $listRole = $this->role->where('deleted_at', 0)->latest()->paginate(6);
-        return view('admin.role.list', compact('title', 'key', 'listRole'));
+        $menus = $this->menu->where('deleted_at', 0)->latest()->paginate(10);
+        return view('admin.menu.list', compact('title', 'key', 'menus'));
     }
 
     /**
@@ -42,8 +40,8 @@ class RoleController extends Controller
     {
         $title = 'Home';
         $key = 'Add';
-        $permissionsParent = $this->permission->where('parent_id', 0)->get();
-        return view('admin.role.add', compact('title', 'key', 'permissionsParent'));
+        $selectedMenu  = $this->getMenu($parentId = '');
+        return view('admin.menu.add', compact('title', 'key', 'selectedMenu'));
     }
 
     /**
@@ -54,16 +52,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = $this->role->create([
-            'name' =>  ucfirst($request->name),
-            'display_name' =>  ucfirst($request->display_name),
+        $menu = $this->menu->create([
+            'name' => ucfirst($request->name),
+            'slug' => Str::slug($request->name),
+            'parent_id' => $request->parent_id,
         ]);
-
-        $role->permissions()->attach($request->childs);
-
-
-        Toastr::success('Bạn đã thêm thành công vai trò người dùng !!!');
-        return redirect('admin/role/index');
+        Toastr::success('Bạn đã thêm thành công !!!');
+        return redirect()->route('menu.index');
     }
 
     /**
@@ -87,10 +82,9 @@ class RoleController extends Controller
     {
         $title = 'Home';
         $key = 'Edit';
-        $role = $this->role->find($id);
-        $permissionsParent = $this->permission->where('parent_id', 0)->get();
-        $permissionCheck = $role->permissions;
-        return view('admin.role.edit', compact('title', 'key', 'role', 'permissionsParent', 'permissionCheck'));
+        $menu = $this->menu->find($id);
+        $selectedMenu  = $this->getMenu($menu->parent_id);
+        return view('admin.menu.edit', compact('title', 'key', 'menu', 'selectedMenu'));
     }
 
     /**
@@ -102,14 +96,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = $this->role->find($id);
-        $role->update([
-            'name' =>  ucfirst($request->name),
-            'display_name' =>  ucfirst($request->display_name),
+        $menu = $this->menu->find($id);
+        $menu->update([
+            'name' => ucfirst($request->name),
+            'slug' => Str::slug($request->name),
+            'parent_id' => $request->parent_id,
         ]);
-        $role->permissions()->sync($request->childs);
-        Toastr::success('Bạn đã cập nhật thành công vai trò người dùng !!!');
-        return redirect('admin/role/index');
+        Toastr::success('Bạn đã cập nhật thành công !!!');
+        return redirect()->route('menu.index');
     }
 
     /**
@@ -120,7 +114,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $this->deleted('role', $id);
-        return redirect('admin/role/index');
+        $delete  = $this->deleted('menu', $id);
+        return redirect()->route('menu.index');
+    }
+
+    public function getMenu($parentId)
+    {
+        $menus = $this->menu->where('deleted_at', 0)->get();
+        $recursive = new Recursive($menus);
+        $data = $recursive->setRecursive($parentId);
+        return $data;
     }
 }

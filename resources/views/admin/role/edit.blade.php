@@ -7,6 +7,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('admins/country/list.css') }}">
+<link rel="stylesheet" href="{{ asset('admins/role/add.css') }}">
 
 @endsection
 
@@ -56,6 +57,45 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="checkall" style="margin-bottom: 10px">
+                                <input type="checkbox" class="form-check-input checkall" id="checkall">
+                                <label class="form-check-label mb-0" for="checkall">Check all</label>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @foreach ($permissionsParent as $permission)
+                                        <div class="card bg-light mb-3 " style="padding: 0">
+                                            <div class="icon">
+                                                <i class="me-2 mdi mdi-apple-keyboard-control card_icon"></i>
+                                            </div>
+                                            <div class="card-header">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input check_all"
+                                                        id="{{ $permission['id'] }}">
+                                                    <label class="form-check-label mb-0" for="{{ $permission['id'] }}">Quản lý
+                                                        {{ $permission['name'] }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="card-body active" style="display: flex;justify-content: space-between;">
+                                                @foreach ($permission->childs as $key => $value)
+                                                    <div class="card-title">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="{{ $value['id'] }}" {{ $permissionCheck->contains('id', $value['id']) ? 'checked' : '' }} value="{{ $value['id'] }}"
+                                                                name="childs[]">
+                                                            <label class="form-check-label mb-0"
+                                                                for="{{ $value['id'] }}">{{ $value['name'] }}</label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn-outline-primary">Cập nhật vai trò</button>
                             <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>
@@ -68,7 +108,26 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.check_all').click(function() {
+            $(this).closest('.card').find('.form-check-input').prop("checked", $(this).prop("checked"));
+        });
+        $('.checkall').click(function() {
+            $(this).parents().find('.form-check-input').prop("checked", $(this).prop("checked"));
+        });
+        $('.card_icon').click(function(){
+             let check = $(this).closest('.card').find('.card-body').hasClass('active');
 
+            if(check == true){
+                $(this).closest('.card').find('.card-body').removeClass('active').hide();
+            }else{
+                $(this).closest('.card').find('.card-body').addClass('active').show();
+            }
+        });
+    });
+</script>
 @endsection
 
 

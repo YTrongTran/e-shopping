@@ -36,6 +36,13 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('menu.index') }}"
+                        aria-expanded="false">
+                        <i class="me-2 mdi mdi-menu"></i>
+                        <span class="hide-menu">Menu</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('blog.index') }}"
                         aria-expanded="false">
                         <i class="me-2 mdi mdi-blogger"></i>
@@ -50,20 +57,21 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('role.index') }}"
-                        aria-expanded="false">
-                        <i class="me-2 mdi mdi-arrange-bring-forward"></i>
-                        <span class="hide-menu">Role</span>
-
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('user.index') }}"
                         aria-expanded="false">
                         <i class="me-2 mdi mdi-account-box"></i>
                         <span class="hide-menu">User</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('role.index') }}"
+                        aria-expanded="false">
+                        <i class="me-2 mdi mdi-arrange-bring-forward"></i>
+                        <span class="hide-menu">Role (Vai trò)</span>
+
+                    </a>
+                </li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('permission.index') }}"
                         aria-expanded="false">

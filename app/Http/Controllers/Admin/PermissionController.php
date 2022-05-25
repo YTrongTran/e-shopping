@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Components\Recursive;
 use App\Http\Controllers\Controller;
 use App\Model\Permission;
+use App\Traits\traitUploadImage;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
+    use traitUploadImage;
     private $permission;
     public function __construct(Permission $permission)
     {
@@ -93,7 +95,11 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = "Home";
+        $key = "Add";
+        $permission = $this->permission->find($id);
+        $htmlPermission = $this->getPermission($permission->parent_id);
+        return view('admin.permission.edit', compact('title', 'key', 'permission', 'htmlPermission'));
     }
 
     /**
@@ -116,7 +122,8 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = $this->deleted('permission', $id);
+        return redirect()->back();
     }
 
     public function getPermission($parentId)

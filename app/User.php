@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'address', 'country_id', 'avatar', 'avatar_path', 'deleted_at','updated_at'
+        'name', 'email', 'password', 'phone', 'address', 'country_id', 'avatar', 'avatar_path', 'deleted_at', 'updated_at'
     ];
 
     /**
@@ -46,5 +46,17 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Roles::class, 'role_user', 'user_id', 'role_id')->withTimestamps();
+    }
+    public function checkPermissionAcces($check)
+    {
+        //kiểm tra user đang login hệ thống có những quyền gì
+        $roles = auth()->user()->roles;
+        foreach ($roles as $role) {
+            $permissons = $role->permissions;
+            if ($permissons->contains('key_code', $check)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

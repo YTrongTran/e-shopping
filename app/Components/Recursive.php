@@ -19,7 +19,6 @@ class Recursive
                 if (!empty($parentId) && $parentId ==  $value['id']) {
                     $this->html .= "<option selected value='" . $value['id'] . "'>" . $text  . $value['name'] . "</option>";
                 } else {
-
                     $this->html .= "<option  value='" . $value['id'] . "'>" . $text  . $value['name'] . "</option>";
                 }
 
@@ -32,7 +31,7 @@ class Recursive
     {
 
         foreach ($this->data as $value) {
-           
+
             if ($value['parent_id'] == $id) {
                 if (!empty($parentId) && $parentId ==  $value['id']) {
                     if ($value['parent_id'] === 0) {
