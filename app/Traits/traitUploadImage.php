@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
  */
 trait traitUploadImage
 {
-
+    //cập nhật ảnh profile
     public function uploadAvatar($request, $name, $folder, $id)
     {
         if ($request->hasFile($name)) {
@@ -29,9 +29,9 @@ trait traitUploadImage
         }
         return null;
     }
+    //1 ảnh có quản lý theo user đang login
     public function uploadAvatarBlog($request, $name, $folder, $id_user, $id)
     {
-
         if ($request->hasFile($name)) {
             $file = $request->$name;
             $namImage = $file->getclientOriginalName();
@@ -46,11 +46,9 @@ trait traitUploadImage
         }
         return null;
     }
+    //úp nhiều ảnh
     public function uploadAvatarArray($item, $namImage, $extenImage, $folder, $id_user, $id)
     {
-
-
-
         $hashFile =  Str::random('15') . '.' . $extenImage;
         $item->move('upload/' . $folder . '/' . $id_user . '/' . $id, $hashFile);
         $data = [

@@ -61,18 +61,16 @@ class BlogController extends Controller
             'description' => $request->desc,
             'user_id' => Auth::user()->id,
         ]);
-        if (is_dir('upload/blog/' . Auth::user()->id)) {
-            $avatar = $this->uploadAvatarBlog($request, 'image', 'blog', Auth::user()->id, $blog->id);
-            if (!empty($avatar)) {
-                //cập nhật
-                $this->blog->find($blog->id)->update([
-                    'image_blog' => $avatar['avatar_name'],
-                    'image_path' => $avatar['avatar_path']
-                ]);
-            }
-        } else {
-            mkdir('upload/blog/' . Auth::user()->id);
+
+        $avatar = $this->uploadAvatarBlog($request, 'image', 'blog', Auth::user()->id, $blog->id);
+        if (!empty($avatar)) {
+            //cập nhật
+            $this->blog->find($blog->id)->update([
+                'image_blog' => $avatar['avatar_name'],
+                'image_path' => $avatar['avatar_path']
+            ]);
         }
+
         Toastr::success('Bạn đã thêm thành công');
         return redirect('admin/blog/index');
     }
@@ -125,7 +123,9 @@ class BlogController extends Controller
             if (!empty($avatar)) {
                 $data['image_blog'] = $avatar['avatar_name'];
                 $data['image_path'] = $avatar['avatar_path'];
-                unlink($blog['image_path']);
+                if (!empty($blog['image_path'])) {
+                    unlink($blog['image_path']);
+                }
             }
         } else {
             mkdir('upload/blog/' . Auth::user()->id);

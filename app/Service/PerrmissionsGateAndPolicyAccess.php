@@ -15,6 +15,10 @@ class PerrmissionsGateAndPolicyAccess
         $this->defineCategoryPolicies();
         $this->defineMenuPolicies();
         $this->defineProductPolicies();
+        $this->defineSliderPolicies();
+        $this->defineSettingPolicies();
+
+
         $this->defineUserPolicies();
         $this->defineRolePolicies();
         $this->definePermissionPolicies();
@@ -58,6 +62,22 @@ class PerrmissionsGateAndPolicyAccess
         Gate::define('product-edit', 'App\Policies\ProductPolicy@update');
         Gate::define('product-delete', 'App\Policies\ProductPolicy@delete');
     }
+    public function defineSliderPolicies()
+    {
+        Gate::define('slider-list', 'App\Policies\SliderPolicy@view');
+        Gate::define('slider-add', 'App\Policies\SliderPolicy@create');
+        Gate::define('slider-edit', 'App\Policies\SliderPolicy@update');
+        Gate::define('slider-delete', 'App\Policies\SliderPolicy@delete');
+    }
+    public function defineSettingPolicies()
+    {
+        Gate::define('setting-list', 'App\Policies\SettingPolicy@view');
+        Gate::define('setting-add', 'App\Policies\SettingPolicy@create');
+        Gate::define('setting-edit', 'App\Policies\SettingPolicy@update');
+        Gate::define('setting-delete', 'App\Policies\SettingPolicy@delete');
+    }
+
+
 
     public function defineUserPolicies()
     {

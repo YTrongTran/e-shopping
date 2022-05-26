@@ -87,7 +87,7 @@ class RoleController extends Controller
     {
         $title = 'Home';
         $key = 'Edit';
-        $role = $this->role->find($id);
+        $role = $this->role->findOrFail($id);
         $permissionsParent = $this->permission->where('parent_id', 0)->get();
         $permissionCheck = $role->permissions;
         return view('admin.role.edit', compact('title', 'key', 'role', 'permissionsParent', 'permissionCheck'));

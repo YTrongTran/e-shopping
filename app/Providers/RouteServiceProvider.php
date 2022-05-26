@@ -53,6 +53,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminRoleRoutes();
         $this->mapAdminPermissionRoutes();
         $this->mapAdminMenuRoutes();
+        $this->mapAdminSliderRoutes();
+        $this->mapAdminSettingRoutes();
 
         //
     }
@@ -118,6 +120,18 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/menu/menu.php'));
+    }
+    protected function mapAdminSliderRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/slider/slider.php'));
+    }
+    protected function mapAdminSettingRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/setting/setting.php'));
     }
 
     /**

@@ -35,9 +35,11 @@
 
 <div class="container-fluid">
     <div class="create_country">
+        @can('user-add')
         <a href="{{ route('user.create') }}"  class="btn btn-outline-success">
             Thêm người dùng
          </a>
+         @endcan
     </div>
     <div class="row">
         <div class="col-12">
@@ -73,8 +75,11 @@
                     @endforeach
                 </td>
                 <td>
-                    <a href="{{ route('user.editUser',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+                    @can('user-edit')
+                    <a href="{{ route('user.editUser',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                    @endcan
 
+                    @can('user-delete')
                     <form style="display: inline-block" action="{{ route('user.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
@@ -83,6 +88,7 @@
                             Xoá
                         </button>
                     </form>
+                    @endcan
 
                 </td>
             </tr>

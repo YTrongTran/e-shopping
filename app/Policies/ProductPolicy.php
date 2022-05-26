@@ -54,7 +54,7 @@ class ProductPolicy
     public function update(User $user, $id)
     {
         $products = Products::find($id);
-        if ($user->id == $products->user_id && $user->name = 'admin') {
+        if ($user->id == $products->user_id ) {
             return $user->checkPermissionAcces(config('permissions.accessProduct.edit-product'));
         }
         return false;
@@ -70,7 +70,7 @@ class ProductPolicy
     public function delete(User $user, $id)
     {
         $products = Products::find($id);
-        if ($user->id == $products->user_id && $user->name = 'admin') {
+        if ($user->id == $products->user_id) {
             return $user->checkPermissionAcces(config('permissions.accessProduct.deleted-product'));
         }
         return false;

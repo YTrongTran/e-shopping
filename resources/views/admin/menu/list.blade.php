@@ -34,9 +34,11 @@
 
 <div class="container-fluid">
     <div class="create_country">
+        @can('menu-add')
         <a href="{{ route('menu.create') }}"  class="btn btn-outline-success">
             Thêm menu
          </a>
+        @endcan
     </div>
     <div class="row">
         <div class="col-12">
@@ -61,9 +63,11 @@
                 <td>{{ $menu['slug'] }}</td>
                 <td>{{ $menu['parent_id'] }}</td>
                 <td>
+                    @can('menu-edit')
+                    <a href="{{ route('menu.edit',['id'=> $menu['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                    @endcan
 
-                    <a href="{{ route('menu.edit',['id'=> $menu['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
-
+                    @can('menu-delete')
                     <form style="display: inline-block" action="{{ route('menu.delete',['id'=>$menu['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $menu['id'] }}" >
@@ -71,8 +75,8 @@
                             <i class="me-2 mdi mdi-delete "></i>
                             Xoá
                         </button>
-
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach

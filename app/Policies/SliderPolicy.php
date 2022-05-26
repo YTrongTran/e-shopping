@@ -2,12 +2,10 @@
 
 namespace App\Policies;
 
-use App\Model\Blog;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Auth;
 
-class BlogPolicy
+class SliderPolicy
 {
     use HandlesAuthorization;
 
@@ -26,12 +24,12 @@ class BlogPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Blog  $blog
+     * @param  \App\Slider  $slider
      * @return mixed
      */
     public function view(User $user)
     {
-        return $user->checkPermissionAcces(config('permissions.accessBlog.list-blog'));
+        return $user->checkPermissionAcces(config('permissions.accessSlider.list-slider'));
     }
 
     /**
@@ -42,49 +40,38 @@ class BlogPolicy
      */
     public function create(User $user)
     {
-        //
-        return $user->checkPermissionAcces(config('permissions.accessBlog.add-blog'));
+        return $user->checkPermissionAcces(config('permissions.accessSlider.add-slider'));
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Blog  $blog
+     * @param  \App\Slider  $slider
      * @return mixed
      */
-    public function update(User $user, $id)
+    public function update(User $user)
     {
-
-        $blog = Blog::find($id);
-        if ($user->id == $blog->user_id) {
-            return $user->checkPermissionAcces(config('permissions.accessBlog.edit-blog'));
-        }
-        return false;
+        return $user->checkPermissionAcces(config('permissions.accessSlider.edit-slider'));
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Blog  $blog
+     * @param  \App\Slider  $slider
      * @return mixed
      */
-    public function delete(User $user, $id)
+    public function delete(User $user)
     {
-
-        $blog = Blog::find($id);
-        if ($user->id == $blog->user_id) {
-            return $user->checkPermissionAcces(config('permissions.accessBlog.deleted-blog'));
-        }
-        return false;
+        return $user->checkPermissionAcces(config('permissions.accessSlider.deleted-slider'));
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Blog  $blog
+     * @param  \App\Slider  $slider
      * @return mixed
      */
     public function restore(User $user)
@@ -96,7 +83,7 @@ class BlogPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Blog  $blog
+     * @param  \App\Slider  $slider
      * @return mixed
      */
     public function forceDelete(User $user)

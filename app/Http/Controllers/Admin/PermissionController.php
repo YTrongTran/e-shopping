@@ -97,7 +97,7 @@ class PermissionController extends Controller
     {
         $title = "Home";
         $key = "Add";
-        $permission = $this->permission->find($id);
+        $permission = $this->permission->findOrFail($id);
         $htmlPermission = $this->getPermission($permission->parent_id);
         return view('admin.permission.edit', compact('title', 'key', 'permission', 'htmlPermission'));
     }
@@ -111,7 +111,29 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $permissions = $this->permission->find($id);
+        if ($request->parent_id == 0) {
+            $permissions->update([
+                'name' => ucfirst($request->name),
+                'display_name' => ucfirst($request->name),
+                'key_code' => '',
+                'parent_id' => $request->parent_id,
+            ]);
+        } else {
+            $listPermissions = $this->permission->where('parent_id', 0)->get();
+            foreach ($listPermissions as $key => $value) {
+                if (trim($value->id) === trim($request->parent_id)) {
+                    $permissions->update([
+                        'name' => ucfirst($request->name) . '-' . $value['name'],
+                        'display_name' => ucfirst($request->name) . '-' . $value['name'],
+                        'key_code' => ucfirst($request->name) . '-' . $value['name'],
+                        'parent_id' => $request->parent_id,
+                    ]);
+                }
+            }
+        }
+        Toastr::success('Bạn đã cập nhật thành công !!!');
+        return redirect()->route('permission.index');
     }
 
     /**

@@ -34,9 +34,11 @@
 
 <div class="container-fluid">
     <div class="create_country">
+        @can('blog-add')
         <a href="{{ route('blog.create') }}"  class="btn btn-outline-success">
             Thêm vài viết
-         </a>
+        </a>
+        @endcan
     </div>
     <div class="row">
         <div class="col-12">
@@ -61,7 +63,11 @@
                 <td><img src="{{ asset( $key['image_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
                 <td>{{ $key->user->name }}</td>
                 <td>
-                    <a href="{{ route('blog.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+                    @can('blog-edit', $key['id'])
+                     <a href="{{ route('blog.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                    @endcan
+
+                    @can('blog-delete', $key['id'])
                     <form style="display: inline-block" action="{{ route('blog.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
@@ -69,8 +75,8 @@
                             <i class="me-2 mdi mdi-delete "></i>
                             Xoá
                         </button>
-
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach

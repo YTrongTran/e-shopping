@@ -27,12 +27,24 @@ return [
         'edit-blog' => 'Edit-Blog',
         'deleted-blog' => 'Deleted-Blog',
     ],
+    'accessSlider' => [
+        'list-slider' => 'List-Slider',
+        'add-slider' => 'Add-Slider',
+        'edit-slider' => 'Edit-Slider',
+        'deleted-slider' => 'Deleted-Slider',
+    ],
 
     'accessProduct' => [
         'list-product' => 'List-Product',
         'add-product' => 'Add-Product',
         'edit-product' => 'Edit-Product',
         'deleted-product' => 'Deleted-Product',
+    ],
+    'accessSetting' => [
+        'list-setting' => 'List-Setting',
+        'add-setting' => 'Add-Setting',
+        'edit-setting' => 'Edit-Setting',
+        'deleted-setting' => 'Deleted-Setting',
     ],
 
     'accessUser' => [

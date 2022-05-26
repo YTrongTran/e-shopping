@@ -34,9 +34,12 @@
 
 <div class="container-fluid">
     <div class="create_country">
+        @can('country-list')
         <a href="{{ route('country.create') }}"  class="btn btn-outline-success">
            Thêm quốc gia
          </a>
+        @endcan
+
     </div>
     <div class="row">
         <div class="col-12">
@@ -59,7 +62,7 @@
                 <td>
                     @can('country-edit')
                     <a href="{{ route('country.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
-                    |
+
                     @endcan
                     @can('country-delete')
                     <form style="display: inline-block" action="{{ route('country.delete',['id'=>$key['id']]) }}" method="post" >

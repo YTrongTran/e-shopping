@@ -86,7 +86,7 @@ class CategoryController extends Controller
     {
         $title = 'Home';
         $key = 'Edit';
-        $category = $this->category->find($id);
+        $category = $this->category->findOrFail($id);
         $categorySelect = $this->getRecursive($category->parent_id);
         return view('admin.category.edit', compact('key', 'title', 'categorySelect', 'category'));
     }

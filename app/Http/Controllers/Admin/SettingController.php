@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Components\Recursive;
 use App\Http\Controllers\Controller;
-use App\Model\Menu;
+use App\Model\Setting;
 use App\Traits\traitUploadImage;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class MenuController extends Controller
+class SettingController extends Controller
 {
     use traitUploadImage;
-    private $menu;
-    public function __construct(Menu $menu)
+    private $setting;
+    public function __construct(Setting $setting)
     {
-        $this->menu = $menu;
+        $this->setting = $setting;
     }
     /**
      * Display a listing of the resource.
@@ -26,9 +24,9 @@ class MenuController extends Controller
     public function index()
     {
         $title = 'Home';
-        $key = 'List';
-        $menus = $this->menu->where('deleted_at', 0)->latest()->paginate(10);
-        return view('admin.menu.list', compact('title', 'key', 'menus'));
+        $key  = 'List';
+        $settings = $this->setting->where('deleted_at', 0)->latest()->paginate(10);
+        return view('admin.setting.list', compact('title', 'key', 'settings'));
     }
 
     /**
@@ -39,9 +37,8 @@ class MenuController extends Controller
     public function create()
     {
         $title = 'Home';
-        $key = 'Add';
-        $selectedMenu  = $this->getMenu($parentId = '');
-        return view('admin.menu.add', compact('title', 'key', 'selectedMenu'));
+        $key  = 'Add';
+        return view('admin.setting.add', compact('title', 'key'));
     }
 
     /**
@@ -52,13 +49,14 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $menu = $this->menu->create([
-            'name' => ucfirst($request->name),
-            'slug' => Str::slug($request->name),
-            'parent_id' => $request->parent_id,
+
+        $settings = $this->setting->create([
+            'config_key' => trim($request->config_key),
+            'config_value' => trim($request->config_value),
+            'type' => $request->type,
         ]);
         Toastr::success('Bạn đã thêm thành công !!!');
-        return redirect()->route('menu.index');
+        return redirect()->route('setting.index');
     }
 
     /**
@@ -81,10 +79,9 @@ class MenuController extends Controller
     public function edit($id)
     {
         $title = 'Home';
-        $key = 'Edit';
-        $menu = $this->menu->findOrFail($id);
-        $selectedMenu  = $this->getMenu($menu->parent_id);
-        return view('admin.menu.edit', compact('title', 'key', 'menu', 'selectedMenu'));
+        $key  = 'Edit';
+        $setting  = $this->setting->findOrFail($id);
+        return view('admin.setting.edit', compact('title', 'key', 'setting'));
     }
 
     /**
@@ -96,14 +93,14 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $menu = $this->menu->find($id);
-        $menu->update([
-            'name' => ucfirst($request->name),
-            'slug' => Str::slug($request->name),
-            'parent_id' => $request->parent_id,
+        $setting  = $this->setting->findOrFail($id);
+        $setting->update([
+            'config_key' => trim($request->config_key),
+            'config_value' => trim($request->config_value),
+            'type' => $request->type,
         ]);
         Toastr::success('Bạn đã cập nhật thành công !!!');
-        return redirect()->route('menu.index');
+        return redirect()->route('setting.index');
     }
 
     /**
@@ -114,15 +111,7 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        $delete  = $this->deleted('menu', $id);
-        return redirect()->route('menu.index');
-    }
-
-    public function getMenu($parentId)
-    {
-        $menus = $this->menu->where('deleted_at', 0)->get();
-        $recursive = new Recursive($menus);
-        $data = $recursive->setRecursive($parentId);
-        return $data;
+        $delete = $this->deleted('setting', $id);
+        return redirect()->route('setting.index');
     }
 }

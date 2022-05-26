@@ -59,7 +59,8 @@
                 <td>{{ $key['name'] }}</td>
                 <td>{{ $key['display_name'] }}</td>
                 <td>
-                    <a href="{{ route('role.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+                    <a href="{{ route('role.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+
                     <form style="display: inline-block" action="{{ route('role.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >

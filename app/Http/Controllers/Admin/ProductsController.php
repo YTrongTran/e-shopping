@@ -140,7 +140,7 @@ class ProductsController extends Controller
     {
         $title = 'Home';
         $key = 'Edit';
-        $product = $this->product->find($id);
+        $product = $this->product->findOrFail($id);
         $categorys = $this->getCategory($product->category_id);
 
         return view('admin.product.edit', compact('title', 'key', 'categorys', 'product'));

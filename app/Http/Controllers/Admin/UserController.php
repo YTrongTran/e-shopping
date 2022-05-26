@@ -169,7 +169,7 @@ class UserController extends Controller
         if (auth::check()) {
             $title = "Home";
             $key = "Profile";
-            $user = $this->user->find($id);
+            $user = $this->user->findOrFail($id);
             $country = $this->country->where('deleted_at', 0)->get();
             $checkidCountry = $user->country;
 

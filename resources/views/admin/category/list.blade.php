@@ -34,9 +34,13 @@
 
 <div class="container-fluid">
     <div class="create_country">
+        @can('category-add')
+
         <a href="{{ route('category.create') }}"  class="btn btn-outline-success">
             Thêm danh mục
          </a>
+        @endcan
+
     </div>
     <div class="row">
         <div class="col-12">
@@ -61,7 +65,11 @@
                 <td>{{ $key['slug'] }}</td>
                 <td>{{ $key['parent_id'] }}</td>
                 <td>
-                    <a href="{{ route('category.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> |
+                    @can('category-edit')
+                    <a href="{{ route('category.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                    @endcan
+
+                    @can('category-delete')
                     <form style="display: inline-block" action="{{ route('category.delete',['id'=>$key['id']]) }}" method="post" >
                         @csrf
                         <input type="hidden" name="id" value="{{ $key['id'] }}" >
@@ -69,8 +77,10 @@
                             <i class="me-2 mdi mdi-delete "></i>
                             Xoá
                         </button>
-
                     </form>
+
+                    @endcan
+
                 </td>
             </tr>
             @endforeach

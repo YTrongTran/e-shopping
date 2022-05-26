@@ -7,6 +7,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('admins/country/list.css') }}">
+<link rel="stylesheet" href="{{ asset('admins/slider/list.css') }}">
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 @endsection
 
@@ -34,9 +35,12 @@
 
 <div class="container-fluid">
     <div class="create_country">
-        <a href="{{ route('permission.create') }}"  class="btn btn-outline-success">
-           Thêm quyền cho vai trò
+        @can('slider-add')
+        <a href="{{ route('slider.create') }}"  class="btn btn-outline-success">
+            Thêm slider
          </a>
+        @endcan
+
     </div>
     <div class="row">
         <div class="col-12">
@@ -46,39 +50,51 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên vai trò</th>
-                <th scope="col">Mô tả vai trò</th>
-                <th scope="col">Mô phỏng key code</th>
+                <th scope="col">Tên slider</th>
+                <th scope="col">Mô tả slider</th>
+                <th scope="col">Ảnh slider</th>
+                <th scope="col">Trạng thái</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($permissions as $permission)
+            @foreach ($sliders as $slider)
             <tr>
 
                 <th scope="row">{{$loop->index + 1  }}</th>
-                <td>{{ $permission['name'] }}</td>
-                <td>{{ $permission['display_name'] }}</td>
-                <td>{{ $permission['key_code'] }}</td>
-                <td>
-                    <a href="{{ route('permission.edit',['id'=> $permission['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                <td>{{ $slider['name'] }}</td>
+                <td class="desciption">{{ implode (" ",explode("-",$slider['description'])) }}</td>
+                <td><img src="{{ asset( $slider['name_image_path']) }}" alt="ảnh slider" style="width: 100px;height: 100px;object-fit: cover;"></td>
+                <td >
+                    @if ($slider['status'] == 0)
+                        <p class="on_slider">Hiển thị</p>
+                    @else
+                        <p class="off_slider">Không hiển thị</p>
+                    @endif
 
-                    <form style="display: inline-block" action="{{ route('permission.delete',['id'=>$permission['id']]) }}" method="post" >
+                </td>
+                <td>
+                    @can('slider-edit')
+                    <a href="{{ route('slider.edit',['id'=> $slider['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
+                    @endcan
+
+                    @can('slider-delete')
+                    <form style="display: inline-block" action="{{ route('slider.delete',['id'=>$slider['id']]) }}" method="post" >
                         @csrf
-                        <input type="hidden" name="id" value="{{ $permission['id'] }}" >
+                        <input type="hidden" name="id" value="{{ $slider['id'] }}" >
                         <button class="btn btn-outline-danger" type="submit" >
                             <i class="me-2 mdi mdi-delete "></i>
                             Xoá
                         </button>
-
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach
 
         </tbody>
     </table>
-    {{ $permissions->links() }}
+    {{ $sliders->links() }}
 </div>
             </div>
         </div>
