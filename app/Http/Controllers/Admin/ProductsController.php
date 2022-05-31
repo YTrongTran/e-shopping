@@ -105,15 +105,16 @@ class ProductsController extends Controller
 
         //thêm tags
         $tagsArray = $request->tags_array;
+        if (!empty($tagsArray)) {
+            foreach ($tagsArray as $tag) {
+                $tags = $this->tag->firstOrCreate([
+                    'name' => $tag
+                ]);
+                $tagId[] =  $tags->id;
+            }
 
-        foreach ($tagsArray as $tag) {
-            $tags = $this->tag->firstOrCreate([
-                'name' => $tag
-            ]);
-            $tagId[] =  $tags->id;
+            $product->tags()->attach($tagId);
         }
-
-        $product->tags()->attach($tagId);
 
         Toastr::success('Bạn đã thêm sản phẩm thành công !!!');
         return redirect()->route('product.index');
@@ -205,14 +206,15 @@ class ProductsController extends Controller
 
         //thêm tags
         $tagsArray = $request->tags_array;
-        foreach ($tagsArray as $tag) {
-            $tags = $this->tag->firstOrCreate([
-                'name' => $tag
-            ]);
-            $tagId[] =  $tags->id;
+        if (!empty($tagsArray)) {
+            foreach ($tagsArray as $tag) {
+                $tags = $this->tag->firstOrCreate([
+                    'name' => $tag
+                ]);
+                $tagId[] =  $tags->id;
+            }
+            $product->tags()->sync($tagId);
         }
-
-        $product->tags()->sync($tagId);
 
         Toastr::success('Bạn đã cập nhật sản phẩm thành công !!!');
         return redirect()->route('product.index');

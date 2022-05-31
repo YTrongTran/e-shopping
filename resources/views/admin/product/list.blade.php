@@ -64,14 +64,14 @@
                 <th scope="row">{{$loop->index + 1  }}</th>
                 <td class="desc">{{ $key['name'] }}</td>
                 <td>{{ $key->category->name }}</td>
-                <td>{{ number_format( $key['price'],0,',','.') }} đ</td>
+                <td>{{  $key['price'] }} đ</td>
                 <td><img src="{{ asset( $key['feature_image_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
                 <td>{{ $key->user->name }}</td>
                 <td>
 
 
                     @can('product-edit',$key['id'])
-                        <a href="{{ route('product.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a> 
+                        <a href="{{ route('product.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
                     @endcan
 
                     @can('product-delete',$key['id'])

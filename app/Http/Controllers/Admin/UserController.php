@@ -75,6 +75,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'password' => $password,
             'country_id' => $request->country_id,
+            'status' => $request->status,
         ]);
         $avart = $this->uploadAvatar($request, 'avatar', 'user', $user->id);
         if (!empty($avart)) {
@@ -84,10 +85,11 @@ class UserController extends Controller
 
             ]);
         }
-        foreach ($request->roles as $roleId) {
-            $user->roles()->attach($roleId);
+        if (!empty($request->roles)) {
+            foreach ($request->roles as $roleId) {
+                $user->roles()->attach($roleId);
+            }
         }
-
         Toastr::success("Bạn đã thành công tài khoản " . $user->name);
         return redirect('admin/user/index/');
     }
@@ -135,6 +137,7 @@ class UserController extends Controller
             'password' => $password,
             'country_id' => $request->country_id,
             'updated_at' => Carbon::now(),
+            'status' => $request->status
         ];
 
         if (is_dir('upload/user/' . $id)) {

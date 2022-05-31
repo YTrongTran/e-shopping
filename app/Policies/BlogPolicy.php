@@ -57,7 +57,7 @@ class BlogPolicy
     {
 
         $blog = Blog::find($id);
-        if ($user->id == $blog->user_id) {
+        if ($user->id == $blog->user_id || Auth::user()->email == 'admin@gmail.com') {
             return $user->checkPermissionAcces(config('permissions.accessBlog.edit-blog'));
         }
         return false;
@@ -74,7 +74,7 @@ class BlogPolicy
     {
 
         $blog = Blog::find($id);
-        if ($user->id == $blog->user_id) {
+        if ($user->id == $blog->user_id || Auth::user()->email == 'admin@gmail.com') {
             return $user->checkPermissionAcces(config('permissions.accessBlog.deleted-blog'));
         }
         return false;

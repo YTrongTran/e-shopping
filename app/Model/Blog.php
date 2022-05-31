@@ -13,4 +13,8 @@ class Blog extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function comment()
+    {
+        return $this->hasMany(BlogCmt::class, 'blog_id')->where('level', 0)->latest();
+    }
 }

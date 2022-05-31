@@ -54,6 +54,7 @@
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Số điện thoại</th>
                 <th scope="col">Vai trò</th>
+                <th scope="col">Trạng thái</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -73,6 +74,13 @@
                         {{$role }}
                      </p>
                     @endforeach
+                </td>
+
+                    @if (trim($key['status']) == 0)
+                    <td>Hoạt động</td>
+                    @else
+                    <td>Chưa có quyền</td>
+                    @endif
                 </td>
                 <td>
                     @can('user-edit')

@@ -118,6 +118,7 @@ class MenuController extends Controller
         return redirect()->route('menu.index');
     }
 
+
     public function getMenu($parentId)
     {
         $menus = $this->menu->where('deleted_at', 0)->get();

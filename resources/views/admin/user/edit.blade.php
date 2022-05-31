@@ -153,6 +153,21 @@
 
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Trạng thái</label>
+                                        <select name="status" id="">
+                                            <option
+                                            {{ (trim($user->status) == 0) ? 'selected':"" }}
+                                             value="0">Hoạt động</option>
+                                            <option
+                                            {{ (trim($user->status) == 1) ? 'selected':"" }}
+                                             value="1">Chưa Hoạt động</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-outline-primary">Cập nhật user</button>
                             <button type="reset" class="btn btn-outline-danger">Huỷ</button>
                         </form>

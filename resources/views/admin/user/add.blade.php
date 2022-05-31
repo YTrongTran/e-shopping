@@ -84,7 +84,6 @@
 
                             <div class="row">
                                 <div class="col-sm-6">
-
                                     <div class="form-group">
                                         <label class="col-md-12">Address</label>
                                         <div class="col-md-12">
@@ -146,7 +145,17 @@
                                             @enderror
                                         </p>
                                     </div>
-
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Trạng thái</label>
+                                        <select name="status" id="">
+                                            <option value="0">Hoạt động</option>
+                                            <option value="1">Chưa Hoạt động</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-outline-primary">Thêm user</button>

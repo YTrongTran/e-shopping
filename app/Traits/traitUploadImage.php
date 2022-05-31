@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 

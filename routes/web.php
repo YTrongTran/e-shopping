@@ -20,3 +20,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/', 'Admin\AdminController@store')->name('admin.login');
     Route::get('/', 'Admin\AdminController@logoutAdmin')->name('admin.logout');
 });
+//frontend
+Route::prefix('/')->group(function () {
+    Route::get('/', 'Frontend\HomeController@index')->name('home.index');
+});

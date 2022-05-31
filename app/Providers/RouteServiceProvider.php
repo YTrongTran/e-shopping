@@ -56,7 +56,15 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminSliderRoutes();
         $this->mapAdminSettingRoutes();
 
-        //
+        //frontedn
+        $this->mapCategoryRoutes();
+        $this->mapProductRoutes();
+        $this->mapBlogRoutes();
+        $this->mapLoginRoutes();
+        $this->mapMemberRoutes();
+
+        //ajax
+        $this->mapAjaxRoutes();
     }
 
     /**
@@ -132,6 +140,45 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin/setting/setting.php'));
+    }
+    //frontend
+    protected function mapCategoryRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/category.php'));
+    }
+    protected function mapProductRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/products.php'));
+    }
+    protected function mapBlogRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/blog.php'));
+    }
+    protected function mapLoginRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/login.php'));
+    }
+    protected function mapMemberRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/member.php'));
+    }
+
+    //ajax
+    protected function mapAjaxRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/ajax.php'));
     }
 
     /**

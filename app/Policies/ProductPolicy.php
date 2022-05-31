@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Model\Products;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class ProductPolicy
 {
@@ -54,7 +55,7 @@ class ProductPolicy
     public function update(User $user, $id)
     {
         $products = Products::find($id);
-        if ($user->id == $products->user_id ) {
+        if ($user->id == $products->user_id || Auth::user()->email == 'admin@gmail.com') {
             return $user->checkPermissionAcces(config('permissions.accessProduct.edit-product'));
         }
         return false;
@@ -70,7 +71,7 @@ class ProductPolicy
     public function delete(User $user, $id)
     {
         $products = Products::find($id);
-        if ($user->id == $products->user_id) {
+        if ($user->id == $products->user_id || Auth::user()->email == 'admin@gmail.com') {
             return $user->checkPermissionAcces(config('permissions.accessProduct.deleted-product'));
         }
         return false;

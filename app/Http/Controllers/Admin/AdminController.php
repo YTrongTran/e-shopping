@@ -38,18 +38,30 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
+
         $data = [
             'name' => $request->name,
             'password' => $request->password,
+            'level' => [1, 0],
+            'status' => [1, 0],
+            'deleted_at' => 0
         ];
         if (Auth::attempt($data)) {
-            Toastr::info("Đăng nhập thành công với tài khoản " . $data['name']);
-            return redirect('admin/user/profile/' . Auth::id());
+            if (
+                auth()->user()->level == 0 &&
+                auth()->user()->status == 1 
+            ) {
+                return redirect('admin')->with('record_login', 'Tài khoản chưa kích hoạt');
+            } else {
+                Toastr::info("Đăng nhập thành công với tài khoản " . $data['name']);
+                return redirect('admin/user/profile/' . Auth::id());
+            }
         } else {
-            return redirect('admin')->with('record_login', 'Tài khoản hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại');
+            return redirect('admin')->with('record_login', 'Tài khoản hoặc mật khẩu không chính xác');
         }
         return redirect()->to('admin');
     }
+
     public function logoutAdmin()
     {
         Auth::logout();
