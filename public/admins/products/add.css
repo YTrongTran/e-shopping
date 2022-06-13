@@ -708,11 +708,14 @@
     border-color: #5897fb;
 }
 .desc {
-    max-width: 200px;
+    max-width: 170px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 .select2.select2-container.select2-container--default {
     width: 100% !important;
+}
+.active {
+    display: none;
 }

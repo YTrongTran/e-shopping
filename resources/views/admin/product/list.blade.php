@@ -54,6 +54,8 @@
                 <th scope="col">Giá sản phẩm</th>
                 <th scope="col">Ảnh sản phẩm</th>
                 <th scope="col">Tên tác giả</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Sale</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -68,8 +70,25 @@
                 <td><img src="{{ asset( $key['feature_image_path']) }}" alt="ảnh đại diện" style="width: 100px;height: 100px;object-fit: cover;"></td>
                 <td>{{ $key->user->name }}</td>
                 <td>
+                    @if ($key['status'] == 0)
+                    <span style="background-color: green;color: #fff;padding: 10px"> Hiển thị
+                    </span>
+                    @else
+                    <span style="background-color: rgba(0, 128, 0, 0.181);color: #fff;padding: 10px"> Không hiển thị
+                    </span>
+                    @endif
+                </td>
+                <td>
+                    @if ($key['sale'] == 0)
+                    <span style="background-color: red;color: #fff;padding: 10px"> Sản phẩm mới
+                    </span>
+                    @else
+                       <span style="background-color: #0078d7;color: #fff;padding: 10px"> Giảm giá:  {{ $key['sale']  }} %</span>
 
+                    @endif
+                </td>
 
+                <td>
                     @can('product-edit',$key['id'])
                         <a href="{{ route('product.edit',['id'=> $key['id']]) }}" class="btn btn-outline-info"><i class="me-2 mdi mdi-account-edit" ></i>Sửa</a>
                     @endcan

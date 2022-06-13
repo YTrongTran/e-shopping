@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
         'Barryvdh\Debugbar\ServiceProvider',
-
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -231,7 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => 'Barryvdh\Debugbar\Facade',
         'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

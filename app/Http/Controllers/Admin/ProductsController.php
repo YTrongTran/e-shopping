@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Components\Recursive;
 use App\Http\Controllers\Controller;
+use App\Model\Brands;
 use App\Model\Category;
 use App\Model\Products;
 use App\Model\Products_Image;
@@ -22,12 +23,14 @@ class ProductsController extends Controller
     use traitUploadImage;
     private $product;
     private $tag;
+    private $brand;
     private $categorys;
     private $product_image;
-    public function __construct(Products $product, Category $categorys, Products_Image $product_image, Tags $tag)
+    public function __construct(Products $product, Category $categorys, Products_Image $product_image, Tags $tag, Brands $brand)
     {
         $this->product = $product;
         $this->tag = $tag;
+        $this->brand = $brand;
         $this->categorys = $categorys;
         $this->product_image = $product_image;
     }
@@ -54,7 +57,8 @@ class ProductsController extends Controller
         $title = 'Home';
         $key = 'Add';
         $categorys = $this->getCategory($parentId = '');
-        return view('admin.product.add', compact('title', 'key', 'categorys'));
+        $brands = $this->brand->where('deleted_at', 0)->get();
+        return view('admin.product.add', compact('title', 'key', 'categorys', 'brands'));
     }
 
     /**
@@ -66,13 +70,23 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
 
+        if ($request->sale == 0) {
+            $sale = $request->sale;
+        } else {
+            $sale = trim($request->number_sale);
+        }
+
         $product = $this->product->create([
             'name' => $request->name,
             'price' => $request->price,
+            'quantity' => $request->quantity,
             'content' => $request->content,
             'category_id' => $request->category_id,
             'user_id' => Auth::user()->id,
-            'slug' => Str::slug($request->name)
+            'slug' => Str::slug($request->name),
+            'status' => $request->status,
+            'sale' => $sale,
+            'brand_id' => $request->brand_id,
         ]);
         //xử lý ảnh đại diện
         $product = $this->product->find($product->id);
@@ -143,8 +157,8 @@ class ProductsController extends Controller
         $key = 'Edit';
         $product = $this->product->findOrFail($id);
         $categorys = $this->getCategory($product->category_id);
-
-        return view('admin.product.edit', compact('title', 'key', 'categorys', 'product'));
+        $brands = $this->brand->where('deleted_at', 0)->get();
+        return view('admin.product.edit', compact('title', 'key', 'categorys', 'product', 'brands'));
     }
 
     /**
@@ -158,13 +172,24 @@ class ProductsController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $product = $this->product->find($id);
+
+        if ($request->sale == 0) {
+            $sale = $request->sale;
+        } else {
+            $sale = trim($request->number_sale);
+        }
+
         $data = [
             'name' => $request->name,
             'price' => $request->price,
+            'quantity' => $request->quantity,
             'content' => $request->content,
             'category_id' => $request->category_id,
             'user_id' => Auth::user()->id,
             'slug' => Str::slug($request->name),
+            'status' => $request->status,
+            'sale' => $sale,
+            'brand_id' => $request->brand_id,
             'updated_at' => Carbon::now()
         ];
         //xử lý ảnh đại diện

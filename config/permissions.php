@@ -46,6 +46,12 @@ return [
         'edit-setting' => 'Edit-Setting',
         'deleted-setting' => 'Deleted-Setting',
     ],
+    'accessBrand' => [
+        'list-brand' => 'List-Brand',
+        'add-brand' => 'Add-Brand',
+        'edit-brand' => 'Edit-Brand',
+        'deleted-brand' => 'Deleted-Brand',
+    ],
 
     'accessUser' => [
         'list-user' => 'List-User',

@@ -27,7 +27,7 @@ class SliderController extends Controller
     {
         $title  = 'Home';
         $key = 'List';
-        $sliders = $this->slider->where('deleted_at', 0)->latest()->paginate(10);
+        $sliders = $this->slider->where(['status' => 0, 'deleted_at' => 0])->latest()->paginate(10);
 
         return view('admin.slider.list', compact('title', 'key', 'sliders'));
     }
@@ -111,7 +111,7 @@ class SliderController extends Controller
             'status' => $request->status,
             'updated_at' => Carbon::now()
         ];
-        if (is_dir('upload/slider/' . auth()->user()->id . '/' . $slider->id)) {
+        if (is_dir('upload/slider/' . auth()->user()->id . '/')) {
             $image = $this->uploadAvatarBlog($request, 'slider_image', 'slider', auth()->user()->id, $slider->id);
             if (!empty($image)) {
 

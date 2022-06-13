@@ -66,9 +66,12 @@ class BlogController extends Controller
         $blogId = $this->blog->findOrFail($id);
         $categorys = $this->category();
 
-        $next = $blogId->where('id', '>', $id)->where('deleted_at', 0)->min('id');
-        $previous = $blogId->where('id', '<',  $id)->where('deleted_at', 0)->max('id');
+        $blogs = $this->blog->where('display_name', $slug)->first();
 
+        $next_id = $blogId->where('id', '>', $blogs->id)->where('deleted_at', 0)->min('id');
+        $previous_id = $blogId->where('id', '<',  $blogs->id)->where('deleted_at', 0)->max('id');
+        $next = $this->blog->find($next_id);
+        $previous = $this->blog->find($previous_id);
 
         if ($request->ajax()) {
             $value =  $request->value;

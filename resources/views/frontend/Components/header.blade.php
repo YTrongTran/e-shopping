@@ -7,8 +7,8 @@
                         <ul class="nav nav-pills">
 
                             <li><a href="#"><i class="fa fa-phone">
-                                    {{ config_setting('phone_header') }}
-                            </i></a></li>
+                                        {{ config_setting('phone_header') }}
+                                    </i></a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i>{{ config_setting('email_header') }}</a></li>
 
                         </ul>
@@ -17,7 +17,8 @@
                 <div class="col-sm-6">
                     <div class="social-icons pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="{{ config_setting('facebook_link') }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{ config_setting('facebook_link') }}" target="_blank"><i
+                                        class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
@@ -33,7 +34,8 @@
             <div class="row">
                 <div class="col-md-4 clearfix">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="{{ asset('frontend/eshopper/images/home/logo.png') }}" alt="" /></a>
+                        <a href="index.html"><img src="{{ asset('frontend/eshopper/images/home/logo.png') }}"
+                                alt="" /></a>
                     </div>
                     <div class="btn-group pull-right clearfix">
                         <div class="btn-group">
@@ -64,20 +66,23 @@
                         <ul class="nav navbar-nav">
                             <li>
                                 @if (auth()->check())
-                                <a href="{{ route('frontend.member.edit',['id'=> auth()->user()->id]) }}"><i class="fa fa-user"></i> Account</a>
+                                <a href="{{ route('frontend.member.edit',['id'=> auth()->user()->id]) }}"><i
+                                        class="fa fa-user"></i> Account</a>
                                 @else
                                 <a href=""><i class="fa fa-user"></i> Account</a>
                                 @endif
                             </li>
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="{{ route('checkout.cart') }}"><i class="fa fa-crosshairs"></i> Checkout</a>
+                            </li>
+                            <li><a href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart cart_icon"
+                                        id="cart_count"></i> Cart</a></li>
 
                             @if (auth()->check())
-                                <li><a href="{{ route('frontend.logout') }}"><i class="fa fa-lock"></i>
+                            <li><a href="{{ route('frontend.logout') }}"><i class="fa fa-lock"></i>
                                     {{ auth()->user()->name }} Logout</a></li>
                             @else
-                                <li><a href="{{ route('frontend.login.create') }}"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a href="{{ route('frontend.login.create') }}"><i class="fa fa-lock"></i> Login</a></li>
                             @endif
                         </ul>
                     </div>
@@ -91,7 +96,8 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -100,40 +106,26 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            {{-- @foreach ($menus as $menu )
-                            @if ($menu->childsMenu->count())
-                            <li class="dropdown"><a href="">{{ $menu['name'] }}<i class="fa fa-angle-down"></i></a>
+
+                            <li><a href="{{ route('home.index') }}" class="active">Home</a></li>
+                            <li class="dropdown"><a href="">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    @include('frontend.Components.childs_menu',['menuParent'=>$menu])
+                                    <li><a href="{{ route('frontend.product.index') }}">Products</a></li>
                                 </ul>
                             </li>
-                            @else
-                            <li><a href="{{ route('home.index') }}" class="{{ ($menu['name']== 'Home') ? 'active' : ' ' }}">{{ $menu['name'] }}</a></li>
-                            @endif
-                            @endforeach --}}
-                            <li><a href="{{ route('home.index') }}">Home</a></li>
-								<li class="dropdown"><a href="">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="{{ route('frontend.product.index') }}">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="login.html">Login</a></li>
-                                    </ul>
-                                </li>
-								<li class="dropdown"><a href="#" class="active">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="{{ route('frontend.blog.index') }}" class="active">Blog List</a></li>
-                                    </ul>
-                                </li>
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
+                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ route('frontend.blog.index') }}" class="active">Blog List</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="404.html">404</a></li>
+                            <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search"/>
+                        <input type="text" placeholder="Search" />
                     </div>
                 </div>
             </div>

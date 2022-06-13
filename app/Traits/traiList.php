@@ -2,9 +2,11 @@
 
 namespace App\Traits;
 
+use App\Model\Brands;
 use App\Model\Category;
 use App\Model\Menu;
 use App\Model\Slider;
+
 
 trait traiList
 {
@@ -28,6 +30,12 @@ trait traiList
     {
         return $categorys = Category::where([
             'parent_id' => 0,
+            'deleted_at' => 0
+        ])->latest()->get();
+    }
+    public function brand()
+    {
+        return $brand = Brands::where([
             'deleted_at' => 0
         ])->latest()->get();
     }

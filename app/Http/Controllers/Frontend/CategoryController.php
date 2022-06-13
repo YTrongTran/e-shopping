@@ -64,8 +64,8 @@ class CategoryController extends Controller
         $categorys = $this->category();
         $products = $this->product->join('categories', function ($join) use ($id) {
             $join->on('products.category_id', '=', 'categories.id')
-                ->where('categories.parent_id', '=', $id);
-        })->select('products.id', 'products.name', 'products.price', 'products.feature_image_path', 'products.content', 'products.slug', 'products.deleted_at')
+                ->where('products.category_id', '=', $id);
+        })->select('products.id', 'products.sale', 'products.status', 'products.name', 'products.price', 'products.feature_image_path', 'products.content', 'products.slug', 'products.deleted_at')
             ->get();
 
         return view('frontend.product.category.list', compact('categorys', 'products', 'menus'));

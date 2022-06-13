@@ -17,6 +17,7 @@ class PerrmissionsGateAndPolicyAccess
         $this->defineProductPolicies();
         $this->defineSliderPolicies();
         $this->defineSettingPolicies();
+        $this->defineBrandPolicies();
 
 
         $this->defineUserPolicies();
@@ -75,6 +76,13 @@ class PerrmissionsGateAndPolicyAccess
         Gate::define('setting-add', 'App\Policies\SettingPolicy@create');
         Gate::define('setting-edit', 'App\Policies\SettingPolicy@update');
         Gate::define('setting-delete', 'App\Policies\SettingPolicy@delete');
+    }
+    public function defineBrandPolicies()
+    {
+        Gate::define('brand-list', 'App\Policies\Brand@view');
+        Gate::define('brand-add', 'App\Policies\Brand@create');
+        Gate::define('brand-edit', 'App\Policies\Brand@update');
+        Gate::define('brand-delete', 'App\Policies\Brand@delete');
     }
 
 

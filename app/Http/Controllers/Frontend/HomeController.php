@@ -40,7 +40,7 @@ class HomeController extends Controller
         $menus = $this->menu();
         $sliders = $this->slider();
         $categorys = $this->category();
-        $products = $this->product->where('deleted_at', 0)->latest()->take(6)->get();
+        $products = $this->product->where(['status' => 0, 'deleted_at' => 0])->latest()->take(6)->get();
 
         return view('frontend.home', compact('products', 'sliders', 'categorys', 'menus'));
     }

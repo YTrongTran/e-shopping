@@ -11,7 +11,7 @@
         content="Nice Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-   @yield('title')
+    @yield('title')
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('template-admin/assets/images/favicon.png') }}">
     <link href="{{ asset('template-admin/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template-admin/dist/css/style.min.css') }}" rel="stylesheet">
@@ -28,7 +28,7 @@
         @include('admin.components.menu_bar_left')
 
         <div class="page-wrapper">
-          @yield('content')
+            @yield('content')
             @include('admin.components.footer')
         </div>
 
@@ -36,14 +36,15 @@
 
 
     <script src="{{ asset('template-admin/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-
     <script src="{{ asset('template-admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('template-admin/assets/extra-libs/sparkline/sparkline.js' ) }}"></script>
     <script src="{{ asset('template-admin/dist/js/waves.js' ) }}"></script>
     <script src="{{ asset('template-admin/dist/js/sidebarmenu.js' ) }}"></script>
     <script src="{{ asset('template-admin/dist/js/custom.min.js' ) }}"></script>
     <script src="{{ asset('template-admin/assets/libs/chartist/dist/chartist.min.js' ) }}"></script>
-    <script src="{{ asset('template-admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' ) }}"></script>
+    <script
+        src="{{ asset('template-admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' ) }}">
+    </script>
     <script src="{{ asset('template-admin/dist/js/pages/dashboards/dashboard1.js' ) }}"></script>
     @yield('js')
 

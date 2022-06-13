@@ -43,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
+        //admin
         $this->mapWebRoutes();
         $this->mapAdminUserRoutes();
         $this->mapAdminCountryRoutes();
@@ -55,13 +55,17 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminMenuRoutes();
         $this->mapAdminSliderRoutes();
         $this->mapAdminSettingRoutes();
+        $this->mapAdminBrandRoutes();
+        $this->mapAdminManagerOrderRoutes();
 
-        //frontedn
+        //frontend
         $this->mapCategoryRoutes();
         $this->mapProductRoutes();
         $this->mapBlogRoutes();
         $this->mapLoginRoutes();
         $this->mapMemberRoutes();
+        $this->mapCartRoutes();
+        $this->mapCheckoutRoutes();
 
         //ajax
         $this->mapAjaxRoutes();
@@ -139,8 +143,23 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->namespace)
+            ->group(base_path('routes/admin/brand/brand.php'));
+    }
+    protected function mapAdminBrandRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
             ->group(base_path('routes/admin/setting/setting.php'));
     }
+    protected function mapAdminManagerOrderRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin/manager_order/manager_order.php'));
+    }
+
+
+
     //frontend
     protected function mapCategoryRoutes()
     {
@@ -171,6 +190,18 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/frontend/member.php'));
+    }
+    protected function mapCartRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/cart.php'));
+    }
+    protected function mapCheckoutRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/frontend/checkout.php'));
     }
 
     //ajax

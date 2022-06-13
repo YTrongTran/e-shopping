@@ -12,13 +12,13 @@
                     </a>
                 </li>
                 @if(Auth::check())
-                    <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('user.edit',['id'=> Auth::id()]) }}"
-                            aria-expanded="false">
-                            <i class="mdi mdi-account-network"></i>
-                            <span class="hide-menu">Profile</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('user.edit',['id'=> Auth::id()]) }}" aria-expanded="false">
+                        <i class="mdi mdi-account-network"></i>
+                        <span class="hide-menu">Profile</span>
+                    </a>
+                </li>
                 @endif
 
                 @can('country-list')
@@ -61,6 +61,16 @@
                 </li>
                 @endcan
 
+                @can('brand-list')
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('brand.index') }}"
+                        aria-expanded="false">
+                        <i class="me-2 mdi mdi-blogger"></i>
+                        <span class="hide-menu">Brand</span>
+                    </a>
+                </li>
+                @endcan
+
                 @can('slider-list')
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('slider.index') }}"
@@ -90,6 +100,16 @@
                     </a>
                 </li>
                 @endcan
+
+                {{-- @can('product-list') --}}
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('manager-order.index') }}" aria-expanded="false">
+                        <i class="me-2 mdi mdi-reorder-horizontal"></i>
+                        <span class="hide-menu">Manager Order</span>
+                    </a>
+                </li>
+                {{-- @endcan --}}
 
                 @can('user-list')
                 <li class="sidebar-item">
@@ -121,10 +141,10 @@
                     </a>
                 </li>
                 @endcan
-{{--
+                {{--
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ asset('template-admin/nice-html/ltr/form-basic.html') }}"
-                        aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ asset('template-admin/nice-html/ltr/form-basic.html') }}" aria-expanded="false">
                         <i class="mdi mdi-arrange-bring-forward"></i>
                         <span class="hide-menu">Form Basic</span>
                     </a>
@@ -145,6 +165,13 @@
                         <span class="hide-menu">404</span>
                     </a>
                 </li> --}}
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ asset('template-admin/nice-html/ltr/icon-material.html') }}" aria-expanded="false">
+                        <i class="mdi mdi-face"></i>
+                        <span class="hide-menu">Icon</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 

@@ -47,14 +47,34 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
+        //kiem tra email co ton tai khong.
         if ($request->ajax()) {
-            $email = $request->email_register;
-            $checkEmail = $this->user->where('email', $email)->first();
+            $email_register = $request->email_register;
+            $checkEmail = $this->user->where('email', $email_register)->first();
         }
         return response()->json([
             'code' => 200,
             'email' => $checkEmail
         ], 200);
+    }
+    public function register(Request $request)
+    {
+        //kiem tra email co ton tai khong.
+        $checkEmail = $this->user->where('email', $request->name)->first();
+        if ($checkEmail == null) {
+            $user = $this->user->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'address' => $request->address,
+                'address' => $request->address,
+                'country_id' => $request->country_id,
+                'level' => 0,
+                'status' => 1,
+            ]);
+            Toastr::success('Bạn đã đăng ký thành công tài khoản');
+        }
+        return redirect()->back();
     }
 
     public function login(Request $request)
@@ -77,7 +97,7 @@ class LoginController extends Controller
         Toastr::error('Email hoặc Password không chính xác');
         return redirect()->back();
     }
-    
+
     public function logout(Request $request)
     {
         Auth::logout();
